@@ -33,7 +33,9 @@ export default class Post extends React.Component {
           onChange={e => this.handleChange(e.target.value)}
         />
         <button onClick={() => this.handleClick(this.props.id)}>Edit</button>
-        <button onClick={() => this.handleDelete()}>Delete</button>
+        <button onClick={() => this.props.handleDelete(this.props.id)}>
+          Delete
+        </button>
       </div>
     );
   }

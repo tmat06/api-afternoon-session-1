@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Post from "./components/Post";
+import Compose from "./components/Compose";
 import "./App.css";
 
 class App extends Component {
@@ -10,6 +11,8 @@ class App extends Component {
       posts: []
     };
     this.updatePost = this.updatePost.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handlePost = this.handlePost.bind(this);
   }
 
   componentDidMount() {
@@ -23,11 +26,30 @@ class App extends Component {
     this.setState({ posts });
   }
 
+  handleDelete(id) {
+    axios
+      .delete(`https://practiceapi.devmountain.com/api/posts?id=${id}`)
+      .then(posts => {
+        this.setState({ posts: [...posts.data] });
+      });
+  }
+
+  handlePost(text) {
+    axios
+      .post(`https://practiceapi.devmountain.com/api/posts`, { text })
+      .then(results => {
+        this.setState({
+          posts: results.data
+        });
+      });
+  }
+
   render() {
     console.log(this.state.posts);
     return (
       <div className="App">
         <h1>AXIOS CALLS</h1>
+        <Compose handlePost={this.handlePost} />
         {this.state.posts.map((val, i) => {
           return (
             <Post
@@ -35,6 +57,7 @@ class App extends Component {
               text={val.text}
               key={val.id}
               updatePost={this.updatePost}
+              handleDelete={this.handleDelete}
             />
           );
         })}
