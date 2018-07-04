@@ -45,11 +45,17 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.posts);
+    // console.log(this.state.posts);
     return (
       <div className="App">
         <h1>AXIOS CALLS</h1>
-        <Compose handlePost={this.handlePost} />
+        <Compose
+          handlePost={this.handlePost}
+          name="Timbo"
+          age="26"
+          hobby="spikeball"
+          love="Cafe Rio"
+        />
         {this.state.posts.map((val, i) => {
           return (
             <Post

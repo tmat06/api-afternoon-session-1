@@ -14,9 +14,9 @@ export default class Post extends React.Component {
   }
 
   handleClick(id) {
-    let text = this.state.text;
+    let { text } = this.state.text;
     axios
-      .put(`https://practiceapi.devmountain.com/api/posts?id=${id}`, { text })
+      .put("https://practiceapi.devmountain.com/api/posts?id=" + id, { text })
       .then(results => {
         this.props.updatePost(results.data);
       });

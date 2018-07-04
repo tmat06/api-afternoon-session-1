@@ -8,23 +8,19 @@ export default class Compose extends React.Component {
     };
   }
 
-  handleText(e) {
-    this.setState({
-      text: e
-    });
-  }
-
   render() {
+    console.log("this.props", this.props);
+    let { name, handlePost } = this.props;
+
     return (
       <div>
         <input
           placeholder="place some text here to post"
-          value={this.state.value}
-          onChange={e => this.handleText(e.target.value)}
+          value={this.state.text}
+          onChange={e => this.setState({ text: e.target.value })}
         />
-        <button onClick={() => this.props.handlePost(this.state.text)}>
-          Post
-        </button>
+        <button onClick={() => handlePost(this.state.text)}>Post</button>
+        <p>{name}</p>
       </div>
     );
   }
